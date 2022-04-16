@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_theme_switcher/presentation/providers/theme_provider.dart';
 import 'package:flutter_theme_switcher/presentation/settings/widgets/selected_theme_indicator.dart';
 import 'package:flutter_theme_switcher/presentation/settings/widgets/switcher_container.dart';
+import 'package:flutter_theme_switcher/presentation/settings/widgets/theme_option.dart';
 import 'package:flutter_theme_switcher/presentation/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +12,7 @@ class ThemeSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double themeOptionIndicatorWidth =
-        (MediaQuery
-            .of(context)
-            .size
-            .width - (20 * 4)) /
+        (MediaQuery.of(context).size.width - (20 * 4)) /
             AppThemes.appThemeOptions.length;
 
     double themeSwitcherOptionsHeight = 60;
@@ -26,7 +24,7 @@ class ThemeSwitcher extends StatelessWidget {
         child: Consumer<ThemeProvider>(
           builder: (c, themeProvider, _) {
             int selectedThemeIndex = AppThemes.appThemeOptions.indexWhere(
-                  (theme) => theme.mode == themeProvider.selectedThemeMode,
+              (theme) => theme.mode == themeProvider.selectedThemeMode,
             );
 
             return Stack(
@@ -34,9 +32,7 @@ class ThemeSwitcher extends StatelessWidget {
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
@@ -49,41 +45,14 @@ class ThemeSwitcher extends StatelessWidget {
                   child: Row(
                     children: List.generate(
                       AppThemes.appThemeOptions.length,
-                          (i) {
-                        bool isSelected = selectedThemeIndex == i;
-                        return Expanded(
-                          child: InkWell(
-                            onTap: isSelected
-                                ? null
-                                : () =>
-                                themeProvider.setSelectedThemeMode(
-                                  AppThemes.appThemeOptions[i].mode,
-                                ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: themeSwitcherOptionsHeight,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Icon(AppThemes.appThemeOptions[i].icon),
-                                  const SizedBox(width: 8),
-                                  Center(
-                                    child: Text(
-                                      AppThemes.appThemeOptions[i].title,
-                                      style: Theme
-                                          .of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                      (i) => ThemeOption(
+                        appTheme: AppThemes.appThemeOptions[i],
+                        height: themeSwitcherOptionsHeight,
+                        isSelected: selectedThemeIndex == i,
+                        onTap: () => themeProvider.setSelectedThemeMode(
+                          AppThemes.appThemeOptions[i].mode,
+                        ),
+                      ),
                     ),
                   ),
                 ),
