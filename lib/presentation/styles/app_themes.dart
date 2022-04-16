@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_theme_switcher/presentation/styles/app_colors.dart';
 
 import '../models/app_theme.dart';
@@ -22,6 +23,8 @@ class AppThemes {
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: primaryColor,
+        systemOverlayStyle:
+            isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
       ),
     );
   }
