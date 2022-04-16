@@ -14,7 +14,7 @@ class SwitcherContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(15),

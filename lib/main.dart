@@ -50,7 +50,7 @@ class App extends StatelessWidget {
             isDark: true,
             primaryColor: themeProvider.selectedPrimaryColor,
           ),
-          themeMode: ThemeMode.system,
+          themeMode: themeProvider.selectedThemeMode,
           home: home,
         ),
       ),

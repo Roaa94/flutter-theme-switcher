@@ -16,7 +16,9 @@ class SettingsPage extends StatelessWidget {
       body: PageWrapper(
         body: Column(
           children: const [
+            SizedBox(height: 30),
             ThemeSwitcher(),
+            SizedBox(height: 20),
             PrimaryColorSwitcher(),
           ],
         ),
