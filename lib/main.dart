@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 void main() {
   runZonedGuarded<Future<void>>(() async {
     setUpServiceLocator();
-    WidgetsFlutterBinding.ensureInitialized();
 
     final StorageService storageService = getIt<StorageService>();
     await storageService.init();
