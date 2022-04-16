@@ -16,7 +16,7 @@ class HiveStorageService implements StorageService {
 
   @override
   dynamic get(String key) {
-    hiveBox.get(key);
+    return hiveBox.get(key);
   }
 
   @override
