@@ -39,7 +39,8 @@ class ThemeSwitcher extends StatelessWidget {
                 ),
                 SelectedThemeIndicator(
                   width: themeOptionIndicatorWidth,
-                  selectedThemeIndex: selectedThemeIndex,
+                  selectedThemeIndex:
+                      selectedThemeIndex >= 0 ? selectedThemeIndex : 0,
                 ),
                 Positioned.fill(
                   child: Row(
