@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_theme_switcher/presentation/settings/widgets/primary_color_switcher.dart';
+import 'package:flutter_theme_switcher/presentation/settings/widgets/theme_switcher.dart';
+import 'package:flutter_theme_switcher/presentation/shared/page_wrapper.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -6,13 +9,16 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: const ClipRRect(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
+      body: PageWrapper(
+        body: Column(
+          children: const [
+            ThemeSwitcher(),
+            PrimaryColorSwitcher(),
+          ],
         ),
       ),
     );
