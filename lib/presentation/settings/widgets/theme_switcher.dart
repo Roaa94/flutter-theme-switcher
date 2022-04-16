@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_theme_switcher/presentation/providers/theme_provider.dart';
+import 'package:flutter_theme_switcher/presentation/settings/widgets/selected_theme_indicator.dart';
 import 'package:flutter_theme_switcher/presentation/settings/widgets/switcher_container.dart';
 import 'package:flutter_theme_switcher/presentation/styles/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,10 @@ class ThemeSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double themeOptionIndicatorWidth =
-        (MediaQuery.of(context).size.width - (20 * 4)) /
+        (MediaQuery
+            .of(context)
+            .size
+            .width - (20 * 4)) /
             AppThemes.appThemeOptions.length;
 
     double themeSwitcherOptionsHeight = 60;
@@ -22,7 +26,7 @@ class ThemeSwitcher extends StatelessWidget {
         child: Consumer<ThemeProvider>(
           builder: (c, themeProvider, _) {
             int selectedThemeIndex = AppThemes.appThemeOptions.indexWhere(
-              (theme) => theme.mode == themeProvider.selectedThemeMode,
+                  (theme) => theme.mode == themeProvider.selectedThemeMode,
             );
 
             return Stack(
@@ -30,43 +34,31 @@ class ThemeSwitcher extends StatelessWidget {
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                 ),
-                AnimatedPositionedDirectional(
-                  duration: const Duration(milliseconds: 300),
-                  start: selectedThemeIndex * themeOptionIndicatorWidth,
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    width: themeOptionIndicatorWidth - 20,
-                    height: themeSwitcherOptionsHeight - 20,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).shadowColor,
-                          blurRadius: 10,
-                        ),
-                      ],
-                    ),
-                  ),
+                SelectedThemeIndicator(
+                  width: themeOptionIndicatorWidth,
+                  selectedThemeIndex: selectedThemeIndex,
                 ),
                 Positioned.fill(
                   child: Row(
                     children: List.generate(
                       AppThemes.appThemeOptions.length,
-                      (i) {
+                          (i) {
                         bool isSelected = selectedThemeIndex == i;
                         return Expanded(
                           child: InkWell(
                             onTap: isSelected
                                 ? null
-                                : () => themeProvider.setSelectedThemeMode(
-                                      AppThemes.appThemeOptions[i].mode,
-                                    ),
+                                : () =>
+                                themeProvider.setSelectedThemeMode(
+                                  AppThemes.appThemeOptions[i].mode,
+                                ),
                             child: Container(
                               alignment: Alignment.center,
                               height: themeSwitcherOptionsHeight,
@@ -79,7 +71,8 @@ class ThemeSwitcher extends StatelessWidget {
                                   Center(
                                     child: Text(
                                       AppThemes.appThemeOptions[i].title,
-                                      style: Theme.of(context)
+                                      style: Theme
+                                          .of(context)
                                           .textTheme
                                           .headline6!
                                           .copyWith(fontSize: 16),
