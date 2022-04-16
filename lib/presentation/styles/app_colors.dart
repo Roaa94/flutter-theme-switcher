@@ -31,7 +31,9 @@ class AppColors {
     assert(value >= 0 && value <= 1);
 
     final hsl = HSLColor.fromColor(color);
-    final hslDark = hsl.withLightness((darker ? (hsl.lightness - value) : (hsl.lightness + value)).clamp(0.0, 1.0));
+    final hslDark = hsl.withLightness(
+        (darker ? (hsl.lightness - value) : (hsl.lightness + value))
+            .clamp(0.0, 1.0));
 
     return hslDark.toColor();
   }
