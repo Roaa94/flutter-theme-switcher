@@ -46,6 +46,9 @@ class ThemeSwitcher extends StatelessWidget {
                     children: List.generate(
                       AppThemes.appThemeOptions.length,
                       (i) => ThemeOption(
+                        key: Key(
+                          '__${AppThemes.appThemeOptions[i].mode.name}_theme_option__',
+                        ),
                         appTheme: AppThemes.appThemeOptions[i],
                         height: themeSwitcherOptionsHeight,
                         isSelected: selectedThemeIndex == i,
