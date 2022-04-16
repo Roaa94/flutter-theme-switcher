@@ -17,13 +17,15 @@ void main() {
   late ThemeProvider themeProvider;
   late StorageService storageService;
 
+  ThemeMode _defaultThemeMode = ThemeMode.light;
+
   setUp(() {
     GetIt.I.registerSingleton<StorageService>(MockStorageService());
     storageService = GetIt.I<StorageService>();
     when(() => storageService.get(StorageKeys.primaryColor))
         .thenReturn(AppColors.primary.value);
     when(() => storageService.get(StorageKeys.themeMode))
-        .thenReturn(ThemeMode.light.name);
+        .thenReturn(_defaultThemeMode.name);
 
     themeProvider = ThemeProvider(storageService);
   });
@@ -48,6 +50,29 @@ void main() {
           findsOneWidget,
         );
       }
+    },
+  );
+
+  testWidgets(
+    'Tapping on theme option changes selectedThemeMode in provider',
+    (WidgetTester tester) async {
+      expect(themeProvider.selectedThemeMode, equals(_defaultThemeMode));
+
+      await tester.pumpApp(
+        const Material(child: ThemeSwitcher()),
+        themeProvider: themeProvider,
+      );
+
+      await tester.pumpAndSettle();
+
+      const Key darkThemeOptionKey = Key('__dark_theme_option__');
+      final darkThemeOptionFinder = find.byKey(darkThemeOptionKey);
+
+      expect(darkThemeOptionFinder, findsOneWidget);
+
+      await tester.tap(darkThemeOptionFinder);
+      await tester.pumpAndSettle();
+      expect(themeProvider.selectedThemeMode, equals(ThemeMode.dark));
     },
   );
 
