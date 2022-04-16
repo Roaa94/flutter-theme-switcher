@@ -17,6 +17,7 @@ class PrimaryColorOption extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        key: Key('__${color.value}_color_option__'),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(

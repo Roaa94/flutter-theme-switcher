@@ -11,6 +11,8 @@ extension PumpApp on WidgetTester {
   Future<void> pumpRawApp(Widget widget) async {
     return pumpWidget(
       MaterialApp(
+        theme: AppThemes.main(),
+        themeMode: ThemeMode.light,
         home: widget,
       ),
     );
