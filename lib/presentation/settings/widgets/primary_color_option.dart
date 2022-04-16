@@ -16,13 +16,15 @@ class PrimaryColorOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         key: Key('__${color.value}_color_option__'),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(
-            color:
-                isSelected ? Theme.of(context).dividerColor : Colors.transparent,
+            color: isSelected
+                ? Theme.of(context).dividerColor
+                : Colors.transparent,
             width: 3,
           ),
           borderRadius: BorderRadius.circular(10),

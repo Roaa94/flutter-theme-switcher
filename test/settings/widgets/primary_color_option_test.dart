@@ -25,7 +25,7 @@ void main() {
 
       expect(finder, findsOneWidget);
 
-      final container = tester.widget<Container>(finder);
+      final container = tester.widget<AnimatedContainer>(finder);
       final BoxDecoration decoration = container.decoration as BoxDecoration;
       expect(decoration.border!.top.color, equals(Colors.transparent));
     },
@@ -47,7 +47,7 @@ void main() {
 
     expect(finder, findsOneWidget);
 
-    final container = tester.widget<Container>(finder);
+    final container = tester.widget<AnimatedContainer>(finder);
     final BoxDecoration decoration = container.decoration as BoxDecoration;
     expect(
       decoration.border!.top.color,
